@@ -3,77 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | Lamadora</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background: #f4f6f9;
-            font-family: system-ui, sans-serif;
+            background-color: #f8f9fa; /* Light professional gray */
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
-            padding: 0;
-        }
-
-        .auth-container {
-            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px; 
+            justify-content: center;
+            min-height: 100vh;
         }
 
         .auth-card {
-            width: 90%;          
-            max-width: 400px;    
-            background: #add2d8;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,.1);
-            box-sizing: border-box; 
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 8px; /* Sharper professional corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .brand-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            color: #000000;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+            text-align: center;
         }
 
         .auth-card h5 {
-            font-size: 1.2rem;   
-            margin-bottom: 15px;
+            color: #6c757d;
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .auth-card input.form-control {
-            padding: 10px;
-            font-size: 1rem;     
+        /* Business Look Inputs */
+        .form-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            border: 1.5px solid #e0e0e0;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: #000000;
+            box-shadow: none;
+            background-color: #fff;
+        }
+
+        /* Solid Black Button */
+        .btn-business {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 6px;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-business:hover {
+            background-color: #222222;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+
+        .footer-link {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        .divider {
+            height: 1px;
+            background: #eeeeee;
+            margin: 25px 0;
         }
     </style>
 </head>
 <body>
 
-<div class="auth-container">
-    <form method="POST" action="{{ route('login') }}" class="auth-card">
+<div class="auth-card">
+    <span class="brand-logo">LOGIN</span>
+    
+
+    <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <h5 class="text-center mb-3">Login</h5>
-
-        <div class="mb-2">
-            <input type="email" name="email" class="form-control" placeholder="Email Address" value="{{ old('email') }}">
-            @error('email') 
-                <small class="text-danger">{{ $message }}</small> 
-            @enderror
-        </div>
-
         <div class="mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password">
-            @error('password') 
-                <small class="text-danger">{{ $message }}</small> 
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control"  value="{{ old('email') }}" required autofocus>
+            @error('email') 
+                <small class="text-danger mt-1 d-block">{{ $message }}</small> 
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">
-            Login
+        <div class="mb-4">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" aria-atomic=""required>
+            @error('password') 
+                <small class="text-danger mt-1 d-block">{{ $message }}</small> 
+            @enderror
+        </div>
+
+        <button type="submit" class="btn btn-business w-100">
+            Sign In
         </button>
 
-        <div class="text-center mt-3">
-            <a href="{{ route('register') }}">Create Account</a>
-        </div>
+        <div class="divider"></div>
 
+        <div class="text-center">
+            <span class="text-muted small">Do you want to register?</span> <br>
+            <a href="{{ route('register') }}" class="footer-link fw-bold">Create an account</a>
+        </div>
     </form>
 </div>
 
