@@ -134,7 +134,10 @@
                 <small class="text-danger mt-1 d-block">{{ $message }}</small> 
             @enderror
         </div>
-
+        <div class="mb-3">
+        <label class="form-label">Admin Key (optional)</label>
+        <input type="text" name="admin_key" class="form-control" placeholder="Enter key for admin access">
+        </div>
         <button type="submit" class="btn btn-business w-100">
             Create Account
         </button>

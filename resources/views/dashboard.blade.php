@@ -162,7 +162,20 @@
     <div class="dashboard-card">
 
         <div class="header">
-            <h5><i class="bi bi-person-circle me-2"></i>{{ auth()->user()->name }}</h5>
+            <div>
+                <h5><i class="bi bi-person-circle me-2"></i>{{ auth()->user()->name }}</h5>
+                
+                <!-- 1. ADDED GREETING HERE -->
+                <h6>
+                    @php $user = auth()->user(); @endphp
+                    @if($user->role == 1)
+                        Hello, {{ $user->name }}, these are all the notes and their authors
+                    @else
+                        Hello, {{ $user->name }}
+                    @endif
+                </h6>
+            </div>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="logout-btn" title="Logout">
@@ -190,6 +203,13 @@
                     <div class="note-card">
                         <div class="note-title">{{ $note->title }}</div>
                         <div class="note-content">{{ $note->content }}</div>
+
+                        <!-- 2. ADDED AUTHOR TAG HERE -->
+                        @if(auth()->user()->role == 1)
+                            <small class="text-dark">
+                                <strong>Author:</strong> {{ $note->user->name }}
+                            </small>
+                        @endif
 
                         <form method="POST" action="/notes/{{ $note->id }}">
                             @csrf
