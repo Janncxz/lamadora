@@ -18,3 +18,6 @@ Route::get('/notes/home', [NoteController::class, 'dashboard'])
     ->middleware('auth')
     ->name('dashboard');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
